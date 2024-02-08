@@ -35,7 +35,7 @@ Untuk menginstall aplikasi ini, ikuti langkah-langkah berikut:
 4. Dapatkan API key dari OpenAI dan tambahkan API key serta atur PAUSE (untuk yang pakai openai free tier) ke file `.env` di direktori projek.
    ```commandline
    OPENAI_API_KEY=api_key_rahasia_anda
-   PAUSE="True/False"
+   PAUSE=True/False
    ```
 
 ## Penggunaan
