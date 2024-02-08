@@ -1,8 +1,8 @@
-# Aplikasi Generator Isi Laporan Praktikum
+# Aplikasi Generator isi Laporan Praktikum
 ![Screenshot 2024-02-08 at 18-00-48 📚 Generator isi Laprak](https://github.com/AndhikaFW/saya-suka-laprak/assets/54433358/ce43b9a5-ecb2-4e8d-81af-157a03dd71d5)
 
 
-Aplikasi MultiDocs Chat adalah sebuah aplikasi Python yang memungkinkan anda untuk chat dengan banyak dokumen. Anda bisa bertanya tentang dokumen-dokumen yang anda berikan menggunakan bahasa yang natural, dan aplikasi ini akan memberikan respon yang relevan berdasarkan dokumen-dokumen yang anda berikan. Aplikasi ini menggunakan sebuah _language model_ untuk menghasilkan jawaban yang akurat terhadap permintaan anda.
+Aplikasi Generator isi Laporan Praktikum adalah sebuah aplikasi Python yang memungkinkan anda untuk membuat laporan praktikum dengan cepat. Anda bisa mengisi data praktikum menggunakan bahasa yang natural, dan aplikasi ini akan memberikan isi laporan praktikum yang relevan berdasarkan dokumen-dokumen yang anda berikan. Aplikasi ini menggunakan sebuah _language model_ untuk menghasilkan jawaban yang akurat terhadap permintaan anda.
 Perlu diketahui bahwa aplikasi ini hanya merespon pertanyaan yang berhubungan dengan dokumen-dokumen yang anda berikan.
 
 ## Dependency-Dependency & Instalasi
