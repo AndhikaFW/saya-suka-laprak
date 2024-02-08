@@ -1,0 +1,22 @@
+setuptools
+openai
+pypdf
+docx2txt
+torch
+transformers 
+python-pptx 
+Pillow
+EbookLib 
+html2text
+olefile
+nbconvert
+git+https://github.com/openai/whisper.git
+llama-index
+python-dotenv
+glob2
+python-multipart
+fastapi
+aiofiles
+uvicorn[standard]
+# uncomment to use huggingface llms
+# huggingface-hub==0.14.1
