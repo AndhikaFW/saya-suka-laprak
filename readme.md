@@ -1,5 +1,6 @@
 # Aplikasi MultiDocs Chat
-![Screenshot 2024-02-06 at 18-48-58 📚 Chat dengan dokumen](https://github.com/AndhikaFW/llamaindex-docs-chat/assets/54433358/ead8c443-f291-4651-9454-509df0be0e3d)
+![Screenshot 2024-02-08 at 18-00-48 📚 Generator isi Laprak](https://github.com/AndhikaFW/saya-suka-laprak/assets/54433358/ce43b9a5-ecb2-4e8d-81af-157a03dd71d5)
+
 
 Aplikasi MultiDocs Chat adalah sebuah aplikasi Python yang memungkinkan anda untuk chat dengan banyak dokumen. Anda bisa bertanya tentang dokumen-dokumen yang anda berikan menggunakan bahasa yang natural, dan aplikasi ini akan memberikan respon yang relevan berdasarkan dokumen-dokumen yang anda berikan. Aplikasi ini menggunakan sebuah _language model_ untuk menghasilkan jawaban yang akurat terhadap permintaan anda.
 Perlu diketahui bahwa aplikasi ini hanya merespon pertanyaan yang berhubungan dengan dokumen-dokumen yang anda berikan.
@@ -31,10 +32,10 @@ Untuk menginstall aplikasi ini, ikuti langkah-langkah berikut:
    pip install -r requirements.txt
    ```
 
-4. Dapatkan API key dari OpenAI dan tambahkan API key serta tanda anda ke file `.env` di direktori projek.
+4. Dapatkan API key dari OpenAI dan tambahkan API key serta atur PAUSE (untuk yang pakai openai free tier) ke file `.env` di direktori projek.
    ```commandline
    OPENAI_API_KEY=api_key_rahasia_anda
-   mark="tanda_anda"
+   PAUSE="True/False"
    ```
 
 ## Penggunaan
