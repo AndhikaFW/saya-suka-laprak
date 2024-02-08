@@ -1,4 +1,4 @@
-# Aplikasi MultiDocs Chat
+# Aplikasi Generator Isi Laporan Praktikum
 ![Screenshot 2024-02-08 at 18-00-48 📚 Generator isi Laprak](https://github.com/AndhikaFW/saya-suka-laprak/assets/54433358/ce43b9a5-ecb2-4e8d-81af-157a03dd71d5)
 
 
