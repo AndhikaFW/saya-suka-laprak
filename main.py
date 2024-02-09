@@ -66,13 +66,6 @@ async def create_upload_files(title: Annotated[str, Form(...)], text0: Annotated
         #set_global_service_context(service_context)                                              
         index = VectorStoreIndex.from_documents(documents, service_context=service_context)       
  
-        #Storing and Loading the Index                                         
-        index.storage_context.persist()                                        
-                                                                       
-        from llama_index import StorageContext, load_index_from_storage        
-                                                                       
-        storage_context = StorageContext.from_defaults(persist_dir="./storage")
-        index = load_index_from_storage(storage_context=storage_context)       
         docs = index.as_query_engine()   
 
         task = f"Buatkan prinsip dasar untuk praktikum { title }"
