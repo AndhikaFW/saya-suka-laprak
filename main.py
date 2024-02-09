@@ -22,12 +22,8 @@ docs_chat = FastAPI()
 
 docs_chat.mount("/static", StaticFiles(directory="static"), name="static")
 
-def llamaindex(inputDocs, task):
-
-    documents = SimpleDirectoryReader(input_files=inputDocs).load_data()
-    index = VectorStoreIndex.from_documents(documents)                                       
-    query_engine = index.as_query_engine()                                                    
-                                                                                          
+def llamaindex(query_engine, task, index, documents):
+                                                                                         
     response = query_engine.query(task)                                                   
                                                                                           
     #Storing and Loading the Index                                                            
@@ -75,40 +71,39 @@ async def create_upload_files(title: Annotated[str, Form(...)], text0: Annotated
         else:
             pause = 0;
 
-        docs = [f"data/{file.filename}" for file in files];
+        inputDocs = [f"data/{file.filename}" for file in files];
         task = f"Buatkan prinsip dasar untuk praktikum { title }"
+        
+        documents = SimpleDirectoryReader(input_files=inputDocs).load_data()
+        index = VectorStoreIndex.from_documents(documents)                  
+        docs = index.as_query_engine()                                      
 
-        p0 = llamaindex(docs, task)
+        p0 = llamaindex(docs, task, index, documents)
         time.sleep(pause)
 
-        docs = [f"data/{file.filename}" for file in files]
         task = f"Berikut merupakan teori tambahan singkat untuk praktikum { title }: ({ text0 }), Buatkan teori tambahan untuk praktikum { title }"
 
-        p1 = llamaindex(docs, task)
+        p1 = llamaindex(docs, task, index, documents)
         time.sleep(pause)
 
-        docs = [f"data/{file.filename}" for file in files]                                                                                           
         task = f"Berikut merupakan analisis percobaan singkat untuk praktikum { title }: ({ text1 }), Buatkan analisis percobaan untuk praktikum { title }"
                                                                                                                                              
-        p2 = llamaindex(docs, task)
+        p2 = llamaindex(docs, task, index, documents)
         time.sleep(pause)
 
-        docs = [f"data/{file.filename}" for file in files]                                                                                           
         task = f"Berikut merupakan analisis hasil singkat untuk praktikum { title }: ({ text2 }), Buatkan analisis hasil untuk praktikum { title }"
                                                                                                                                              
-        p3 = llamaindex(docs, task)
+        p3 = llamaindex(docs, task, index, documents)
         time.sleep(pause)
  
-        docs = [f"data/{file.filename}" for file in files]                                                                                           
         task = f"Berikut merupakan analisis kesalahan singkat untuk praktikum { title }: ({ text3 }), Buatkan analisis kesalahan untuk praktikum { title }"
                                                                                                                                              
-        p4 = llamaindex(docs, task)
+        p4 = llamaindex(docs, task, index, documents)
         time.sleep(pause)
 
-        docs = [f"data/{file.filename}" for file in files]                                                                                           
         task = f"Berikut merupakan kesimpulan singkat untuk praktikum { title }: ({ text4 }), berdasarkan analisis: ({ p2 }{ p3 }),  Buatkan kesimpulan untuk praktikum { title }"
                                                                                                                                              
-        p5 = llamaindex(docs, task)
+        p5 = llamaindex(docs, task, index, documents)
 
         pagecontent = f"""<!DOCTYPE html>                                                                                                                                                                                             
         <html lang="en">                                                                                                                                                                                            
