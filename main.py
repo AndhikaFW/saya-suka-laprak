@@ -22,27 +22,9 @@ docs_chat = FastAPI()
 
 docs_chat.mount("/static", StaticFiles(directory="static"), name="static")
 
-def llamaindex(query_engine, task, index, documents):
+def llamaindex(query_engine, task):
                                                                                          
     response = query_engine.query(task)                                                   
-                                                                                          
-    #Storing and Loading the Index                                                            
-    index.storage_context.persist()                                                           
-                                                                                          
-    from llama_index import StorageContext, load_index_from_storage                           
-                                                                                          
-    storage_context = StorageContext.from_defaults(persist_dir="./storage")                   
-    index = load_index_from_storage(storage_context=storage_context)                          
-                                                                                          
-    #Custom                                                                                   
-    from llama_index import ServiceContext, set_global_service_context                        
-                                                                                          
-    #define LLM:                                                                              
-    llm = OpenAI(model="gpt-3.5-turbo", temperature=0, max_tokens=256)                        
-    #configure service context                                                                
-    service_context = ServiceContext.from_defaults(llm=llm, chunk_size=1000, chunk_overlap=20)
-    #set_global_service_context(service_context)                                              
-    index = VectorStoreIndex.from_documents(documents, service_context=service_context)
 
     return response;
 
@@ -72,38 +54,55 @@ async def create_upload_files(title: Annotated[str, Form(...)], text0: Annotated
             pause = 0;
 
         inputDocs = [f"data/{file.filename}" for file in files];
-        task = f"Buatkan prinsip dasar untuk praktikum { title }"
-        
         documents = SimpleDirectoryReader(input_files=inputDocs).load_data()
-        index = VectorStoreIndex.from_documents(documents)                  
-        docs = index.as_query_engine()                                      
 
-        p0 = llamaindex(docs, task, index, documents)
+        #Custom                                                                                   
+        from llama_index import ServiceContext, set_global_service_context                        
+                                                                                          
+        #define LLM:                                                                              
+        llm = OpenAI(model="gpt-3.5-turbo", temperature=0, max_tokens=256)                        
+        #configure service context                                                                
+        service_context = ServiceContext.from_defaults(llm=llm, chunk_size=1000, chunk_overlap=20)
+        #set_global_service_context(service_context)                                              
+        index = VectorStoreIndex.from_documents(documents, service_context=service_context)       
+ 
+        #Storing and Loading the Index                                         
+        index.storage_context.persist()                                        
+                                                                       
+        from llama_index import StorageContext, load_index_from_storage        
+                                                                       
+        storage_context = StorageContext.from_defaults(persist_dir="./storage")
+        index = load_index_from_storage(storage_context=storage_context)       
+        docs = index.as_query_engine()   
+
+        task = f"Buatkan prinsip dasar untuk praktikum { title }"
+
+        p0 = llamaindex(docs, task)
         time.sleep(pause)
 
         task = f"Berikut merupakan teori tambahan singkat untuk praktikum { title }: ({ text0 }), Buatkan teori tambahan untuk praktikum { title }"
 
-        p1 = llamaindex(docs, task, index, documents)
+        p1 = llamaindex(docs, task)
         time.sleep(pause)
 
         task = f"Berikut merupakan analisis percobaan singkat untuk praktikum { title }: ({ text1 }), Buatkan analisis percobaan untuk praktikum { title }"
                                                                                                                                              
-        p2 = llamaindex(docs, task, index, documents)
+        p2 = llamaindex(docs, task)
         time.sleep(pause)
 
         task = f"Berikut merupakan analisis hasil singkat untuk praktikum { title }: ({ text2 }), Buatkan analisis hasil untuk praktikum { title }"
                                                                                                                                              
-        p3 = llamaindex(docs, task, index, documents)
+        p3 = llamaindex(docs, task)
         time.sleep(pause)
  
         task = f"Berikut merupakan analisis kesalahan singkat untuk praktikum { title }: ({ text3 }), Buatkan analisis kesalahan untuk praktikum { title }"
                                                                                                                                              
-        p4 = llamaindex(docs, task, index, documents)
+        p4 = llamaindex(docs, task)
         time.sleep(pause)
 
         task = f"Berikut merupakan kesimpulan singkat untuk praktikum { title }: ({ text4 }), berdasarkan analisis: ({ p2 }{ p3 }),  Buatkan kesimpulan untuk praktikum { title }"
                                                                                                                                              
-        p5 = llamaindex(docs, task, index, documents)
+        p5 = llamaindex(docs, task)
 
         pagecontent = f"""<!DOCTYPE html>                                                                                                                                                                                             
         <html lang="en">                                                                                                                                                                                            
