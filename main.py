@@ -122,7 +122,7 @@ async def create_upload_files(title: Annotated[str, Form(...)], text0: Annotated
                         </button>                                                                                                                                                                                                                                                                                                                                       
                     </li>                                                                                                                                                                                                                                                                                                                                               
                 </ul>                                                                                                                                                                                                                                                                                                                                                   
-                <div id="GFG" style="padding:20px 5% 0"><p style="text-align: center;">
+                <div id="GFG" style="padding:20px 5% 0; white-space: pre-wrap">
                     <h2><b>{ title }</b></h2><br>
                     <h3><b>Prinsip Dasar</b></h3><br>
                     { p0 }<br><br>
