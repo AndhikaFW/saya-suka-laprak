@@ -12,8 +12,8 @@ from dotenv import load_dotenv
 load_dotenv()                                                  
 api_key = os.getenv("OPENAI_API_KEY")
 checkpause = os.getenv("PAUSE")
-from llama_index.llms import OpenAI                            
-from llama_index import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.llms.openai import OpenAI
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.schema import Document
 from pathlib import Path
 import time
@@ -57,14 +57,15 @@ async def create_upload_files(title: Annotated[str, Form(...)], text0: Annotated
         documents = SimpleDirectoryReader(input_files=inputDocs).load_data()
 
         #Custom                                                                                   
-        from llama_index import ServiceContext, set_global_service_context                        
+        from llama_index.core import Settings
                                                                                           
         #define LLM:                                                                              
-        llm = OpenAI(model="gpt-3.5-turbo", temperature=0, max_tokens=256)                        
-        #configure service context                                                                
-        service_context = ServiceContext.from_defaults(llm=llm, chunk_size=1000, chunk_overlap=20)
+        Settings.llm = OpenAI(model="gpt-3.5-turbo", temperature=0, max_tokens=256)
+        #configure settings                                                                
+        Settings.chunk_size = 512
+        Settings.chunk_overlap = 20
         #set_global_service_context(service_context)                                              
-        index = VectorStoreIndex.from_documents(documents, service_context=service_context)       
+        index = VectorStoreIndex.from_documents(documents)       
  
         docs = index.as_query_engine()   
 
