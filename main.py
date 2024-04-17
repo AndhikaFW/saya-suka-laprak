@@ -14,7 +14,6 @@ api_key = os.getenv("OPENAI_API_KEY")
 checkpause = os.getenv("PAUSE")
 from llama_index.llms.openai import OpenAI
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
-from llama_index.schema import Document
 from pathlib import Path
 import time
 
